@@ -25,45 +25,30 @@ def home():
 @app.post("/obesity-metrics", tags=[obesity_metrics_tag],
           responses={"200": ObesityMetricsSchema, "400": ErrorSchema})
 def predict_obesity_level(form: ObesityMetricsSchema):
-    gender = form.gender
-    age = form.age
-    height = form.height
-    weight = form.weight
-    family_history = form.family_history
-    high_caloric_intake = form.high_caloric_intake
-    is_smoker = form.is_smoker
-    calorie_monitoring = form.calorie_monitoring
-    veg_cons = form.vegetable_consumption
-    meals = form.daily_meals_count
-    water = form.daily_water_intake
-    phys_act = form.physical_activity_frequency
-    tech_usage = form.tech_usage_time
-    food_between = form.food_between_meals
-    alcohol = form.alcohol_consumption
-    transport = form.transportation_mode
     predictor_service = PredictorService()
-    
-    obesity_level = str(predictor_service.predict(X_input)[0])
+    x_input = predictor_service.prepare_form(form)
+    logger.info(x_input)
+    obesity_level = str(predictor_service.predict(x_input)[0])
 
     paciente = ObesityMetrics(
         name = form.name,
-        gender=gender,
-        age=age,
-        height=height,
-        weight=weight,
-        family_history=family_history,
-        high_caloric_intake=high_caloric_intake,
-        vegetable_consumption=veg_cons,
-        daily_meals_count=meals,
-        food_between_meals=food_between,
-        is_smoker=is_smoker,
-        daily_water_intake=water,
-        calorie_monitoring=calorie_monitoring,
-        physical_activity_frequency=phys_act,
-        tech_usage_time=tech_usage,
-        alcohol_consumption=alcohol,
-        transportation_mode=transport,
-        obesity_level=obesity_level
+        gender= form.gender,
+        age= form.age,
+        height= form.height,
+        weight=form.weight,
+        family_history= form.family_history,
+        high_caloric_intake= form.high_caloric_intake,
+        vegetable_consumption= form.vegetable_consumption,
+        daily_meals_count= form.daily_meals_count,
+        food_between_meals= form.food_between_meals,
+        is_smoker= form.is_smoker,
+        daily_water_intake= form.daily_water_intake,
+        calorie_monitoring= form.calorie_monitoring,
+        physical_activity_frequency= form.physical_activity_frequency,
+        tech_usage_time= form.tech_usage_time,
+        alcohol_consumption= form.alcohol_consumption,
+        transportation_mode= form.transportation_mode,
+        obesity_level= form.obesity_level
     )
 
     logger.debug(f"Processando predição para paciente de idade: '{paciente.age}'")

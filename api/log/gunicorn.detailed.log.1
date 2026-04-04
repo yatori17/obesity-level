@@ -1,0 +1,115 @@
+[2026-04-04 19:10:48,656] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
+[2026-04-04 19:10:53,498] INFO predict_obesity_level() L30   ['29.0' 'True' '1.73' '83.0' 'False' 'False' '1.0' 'nan' '0' 'False' '2.0'
+ 'False' '0.0' '1.0' 'no' 'Walking'] - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L30  
+[2026-04-04 19:10:53,503] ERROR log_exception() L1449 Exception on /obesity-metrics [POST] - call_trace=c:\users\55219\miniconda3\lib\site-packages\flask\app.py L1449
+Traceback (most recent call last):
+  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1519, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\55219\miniconda3\lib\site-packages\flask_cors\extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1517, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1503, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "c:\users\55219\miniconda3\lib\site-packages\flask_openapi3\scaffold.py", line 191, in wrapper
+    resp = _do_wrapper(
+  File "c:\users\55219\miniconda3\lib\site-packages\flask_openapi3\do_wrapper.py", line 135, in _do_wrapper
+    response = func(**request_kwargs)
+  File "C:\Users\55219\Documents\workspace\pos\burnout\api\app.py", line 31, in predict_obesity_level
+    obesity_level = str(predictor_service.predict(x_input)[0])
+  File "C:\Users\55219\Documents\workspace\pos\burnout\api\model\predictor_service.py", line 11, in predict
+    return self.model.predict(entrada)[0]
+  File "c:\users\55219\miniconda3\lib\site-packages\sklearn\pipeline.py", line 787, in predict
+    Xt = transform.transform(Xt)
+  File "c:\users\55219\miniconda3\lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "c:\users\55219\miniconda3\lib\site-packages\sklearn\preprocessing\_data.py", line 1062, in transform
+    X = validate_data(
+  File "c:\users\55219\miniconda3\lib\site-packages\sklearn\utils\validation.py", line 2944, in validate_data
+    out = check_array(X, input_name="X", **check_params)
+  File "c:\users\55219\miniconda3\lib\site-packages\sklearn\utils\validation.py", line 1055, in check_array
+    array = _asarray_with_order(array, order=order, dtype=dtype, xp=xp)
+  File "c:\users\55219\miniconda3\lib\site-packages\sklearn\utils\_array_api.py", line 839, in _asarray_with_order
+    array = numpy.asarray(array, order=order, dtype=dtype)
+  File "c:\users\55219\miniconda3\lib\site-packages\pandas\core\generic.py", line 2171, in __array__
+    arr = np.asarray(values, dtype=dtype)
+ValueError: could not convert string to float: np.str_('True')
+[2026-04-04 19:11:39,889] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
+[2026-04-04 19:11:45,812] INFO predict_obesity_level() L30   ['29.0' '0' '1.73' '83.0' 'False' 'False' '1.0' 'nan' '0' 'False' '2.0'
+ 'False' '0.0' '1.0' 'no' 'Walking'] - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L30  
+[2026-04-04 19:11:45,818] ERROR log_exception() L1449 Exception on /obesity-metrics [POST] - call_trace=c:\users\55219\miniconda3\lib\site-packages\flask\app.py L1449
+Traceback (most recent call last):
+  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1519, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\55219\miniconda3\lib\site-packages\flask_cors\extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1517, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1503, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "c:\users\55219\miniconda3\lib\site-packages\flask_openapi3\scaffold.py", line 191, in wrapper
+    resp = _do_wrapper(
+  File "c:\users\55219\miniconda3\lib\site-packages\flask_openapi3\do_wrapper.py", line 135, in _do_wrapper
+    response = func(**request_kwargs)
+  File "C:\Users\55219\Documents\workspace\pos\burnout\api\app.py", line 31, in predict_obesity_level
+    obesity_level = str(predictor_service.predict(x_input)[0])
+  File "C:\Users\55219\Documents\workspace\pos\burnout\api\model\predictor_service.py", line 11, in predict
+    return self.model.predict(entrada)[0]
+  File "c:\users\55219\miniconda3\lib\site-packages\sklearn\pipeline.py", line 787, in predict
+    Xt = transform.transform(Xt)
+  File "c:\users\55219\miniconda3\lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "c:\users\55219\miniconda3\lib\site-packages\sklearn\preprocessing\_data.py", line 1062, in transform
+    X = validate_data(
+  File "c:\users\55219\miniconda3\lib\site-packages\sklearn\utils\validation.py", line 2944, in validate_data
+    out = check_array(X, input_name="X", **check_params)
+  File "c:\users\55219\miniconda3\lib\site-packages\sklearn\utils\validation.py", line 1055, in check_array
+    array = _asarray_with_order(array, order=order, dtype=dtype, xp=xp)
+  File "c:\users\55219\miniconda3\lib\site-packages\sklearn\utils\_array_api.py", line 839, in _asarray_with_order
+    array = numpy.asarray(array, order=order, dtype=dtype)
+  File "c:\users\55219\miniconda3\lib\site-packages\pandas\core\generic.py", line 2171, in __array__
+    arr = np.asarray(values, dtype=dtype)
+ValueError: could not convert string to float: np.str_('False')
+[2026-04-04 19:14:13,599] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
+[2026-04-04 19:14:19,535] INFO predict_obesity_level() L30   [[ 1.   29.    1.73 83.    0.    0.    1.    0.    0.    0.    2.    0.
+   0.    1.    0.    0.  ]] - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L30  
+[2026-04-04 19:14:19,538] ERROR log_exception() L1449 Exception on /obesity-metrics [POST] - call_trace=c:\users\55219\miniconda3\lib\site-packages\flask\app.py L1449
+Traceback (most recent call last):
+  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1519, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\55219\miniconda3\lib\site-packages\flask_cors\extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1517, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1503, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "c:\users\55219\miniconda3\lib\site-packages\flask_openapi3\scaffold.py", line 191, in wrapper
+    resp = _do_wrapper(
+  File "c:\users\55219\miniconda3\lib\site-packages\flask_openapi3\do_wrapper.py", line 135, in _do_wrapper
+    response = func(**request_kwargs)
+  File "C:\Users\55219\Documents\workspace\pos\burnout\api\app.py", line 31, in predict_obesity_level
+    obesity_level = str(predictor_service.predict(x_input)[0])
+  File "C:\Users\55219\Documents\workspace\pos\burnout\api\model\predictor_service.py", line 10, in predict
+    entrada = pd.DataFrame([data])
+  File "c:\users\55219\miniconda3\lib\site-packages\pandas\core\frame.py", line 871, in __init__
+    mgr = ndarray_to_mgr(
+  File "c:\users\55219\miniconda3\lib\site-packages\pandas\core\internals\construction.py", line 319, in ndarray_to_mgr
+    values = _prep_ndarraylike(values, copy=copy_on_sanitize)
+  File "c:\users\55219\miniconda3\lib\site-packages\pandas\core\internals\construction.py", line 582, in _prep_ndarraylike
+    return _ensure_2d(values)
+  File "c:\users\55219\miniconda3\lib\site-packages\pandas\core\internals\construction.py", line 592, in _ensure_2d
+    raise ValueError(f"Must pass 2-d input. shape={values.shape}")
+ValueError: Must pass 2-d input. shape=(1, 1, 16)
+[2026-04-04 19:14:33,174] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
+[2026-04-04 19:14:38,708] INFO predict_obesity_level() L30   [ 1.   29.    1.73 83.    0.    0.    1.    0.    0.    0.    2.    0.
+  0.    1.    0.    0.  ] - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L30  
+[2026-04-04 19:24:14,040] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
+[2026-04-04 19:24:27,457] INFO predict_obesity_level() L30   [[29.    1.73 83.    1.     nan  2.    0.    1.    1.    0.    0.    0.
+   0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    1.  ]] - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L30  
+[2026-04-04 19:24:44,370] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 

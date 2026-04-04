@@ -27,6 +27,7 @@ class ObesityMetricsSchema(BaseModel):
     food_between_meals: str
     alcohol_consumption: str
     transportation_mode: str
+    obesity_level: str
     model_config = ConfigDict(from_attributes=True)
 
 class ObesityMetricsSearchSchema(BaseModel):
