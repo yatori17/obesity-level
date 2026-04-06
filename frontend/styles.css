@@ -42,3 +42,42 @@ body {
       text-align: center;
       font-weight: bold;
     }
+    table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+.btn-delete {
+    background-color: transparent;
+    border: none;
+    color: #dc3545; /* Vermelho Bootstrap */
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-delete:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-delete svg, .btn-delete i {
+    vertical-align: middle;
+}

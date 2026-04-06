@@ -27,11 +27,14 @@ class ObesityMetricsSchema(BaseModel):
     food_between_meals: str
     alcohol_consumption: str
     transportation_mode: str
-    obesity_level: str
+    obesity_level: Optional[str]
     model_config = ConfigDict(from_attributes=True)
 
 class ObesityMetricsSearchSchema(BaseModel):
-    name: str = "Test"
+    name: Optional[str]
+
+class ObesityMetricsDeleteSchema(BaseModel):
+    id: int
 
 def present_obesity_metrics(obesity_metrics: ObesityMetrics):
     """ Returns a representation of the obesity_metric table

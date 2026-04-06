@@ -25,10 +25,11 @@ def home():
 @app.post("/obesity-metrics", tags=[obesity_metrics_tag],
           responses={"200": ObesityMetricsSchema, "400": ErrorSchema})
 def predict_obesity_level(form: ObesityMetricsSchema):
+    logger.info(form)
     predictor_service = PredictorService()
     x_input = predictor_service.prepare_form(form)
     logger.info(x_input)
-    obesity_level = str(predictor_service.predict(x_input)[0])
+    obesity_level = str(predictor_service.predict(x_input))
 
     paciente = ObesityMetrics(
         name = form.name,
@@ -36,22 +37,22 @@ def predict_obesity_level(form: ObesityMetricsSchema):
         age= form.age,
         height= form.height,
         weight=form.weight,
-        family_history= form.family_history,
-        high_caloric_intake= form.high_caloric_intake,
+        family_history= bool(form.family_history),
+        high_caloric_intake= bool(form.high_caloric_intake),
         vegetable_consumption= form.vegetable_consumption,
         daily_meals_count= form.daily_meals_count,
         food_between_meals= form.food_between_meals,
-        is_smoker= form.is_smoker,
+        is_smoker= bool(form.is_smoker),
         daily_water_intake= form.daily_water_intake,
-        calorie_monitoring= form.calorie_monitoring,
+        calorie_monitoring= bool(form.calorie_monitoring),
         physical_activity_frequency= form.physical_activity_frequency,
         tech_usage_time= form.tech_usage_time,
         alcohol_consumption= form.alcohol_consumption,
         transportation_mode= form.transportation_mode,
-        obesity_level= form.obesity_level
+        obesity_level= obesity_level
     )
 
-    logger.debug(f"Processando predição para paciente de idade: '{paciente.age}'")
+    logger.info(f"Processando predição para paciente de idade: '{paciente.age}'")
 
     try:
         session = Session()
@@ -63,7 +64,7 @@ def predict_obesity_level(form: ObesityMetricsSchema):
         logger.debug(f"Adicionado registro de obesidade ID: '{paciente.id}'")
         
         # Retorna usando a função de visualização que criamos anteriormente
-        return apresenta_paciente_obesidade(paciente), 200
+        return present_obesity_metrics(paciente), 200
 
     except Exception as e:
         error_msg = f"Não foi possível salvar os dados de métricas: {str(e)}"
@@ -77,13 +78,50 @@ def get_obesity_metrics(query: ObesityMetricsSearchSchema):
     logger.debug("Retrieving ObesityMetricsSearchSchema")
     session = Session()
     searchQuery = session.query(ObesityMetrics)
-    searchQuery = searchQuery.filter(ObesityMetrics.name.ilike(f"%{query.name}%"))
-
+    if query.name:
+        searchQuery = searchQuery.filter(ObesityMetrics.name.ilike(f"%{query.name}%"))
+    logger.info(query.name)
     obesityMetrics = searchQuery.all()
 
     if not obesityMetrics:
         return {"obesityMetrics": []}, 200
 
     logger.debug(f"{len(obesityMetrics)} obesityMetrics found")
-    return present_obesity_metrics(obesityMetrics), 200
+    return present_obesity_metrics_list(obesityMetrics), 200
 
+
+@app.delete(
+    "/obesity-metrics",
+    tags=[obesity_metrics_tag],
+    responses={"200": ObesityMetricsSchema, "404": ErrorSchema},
+)
+def delete_paciente(query: ObesityMetricsDeleteSchema):
+    """Removes a obesity metrics from the database
+
+    Args:
+        id (integer) the id of the report
+
+    Returns:
+        msg: Success message or error
+    """
+    obesity_metrics_id = query.id
+    logger.debug(f"Deleting report with id #{obesity_metrics_id}")
+
+    session = Session()
+    obesity_metrics = (
+        session.query(ObesityMetrics).filter(ObesityMetrics.id == obesity_metrics_id).first()
+    )
+
+    if not obesity_metrics:
+        error_msg = "ObesityMetrics Report not found :/"
+        logger.warning(
+            f"Error deleting the report with id '{obesity_metrics_id}', {error_msg}"
+        )
+        return {"message": error_msg}, 404
+    else:
+        session.delete(obesity_metrics)
+        session.commit()
+        logger.debug(f"Deleting obesity metrics report with id#{obesity_metrics_id}")
+        return {
+            "message": f"Obesity Metrics with id {obesity_metrics_id} was removed successfully!"
+        }, 200

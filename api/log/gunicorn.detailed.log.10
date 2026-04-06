@@ -1,5 +1,12 @@
-[2026-04-04 17:54:04,189] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
-[2026-04-04 17:54:13,586] ERROR log_exception() L1449 Exception on /obesity-metrics [POST] - call_trace=c:\users\55219\miniconda3\lib\site-packages\flask\app.py L1449
+[2026-04-05 16:32:32,650] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
+[2026-04-05 16:32:37,656] INFO predict_obesity_level() L28   id=None name='Leonardo Andrade' gender='Masculino' age=29.0 height=1.73 weight=84.0 family_history=False high_caloric_intake=False is_smoker=False calorie_monitoring=False vegetable_consumption=3.0 daily_meals_count=4.0 daily_water_intake=1.5 physical_activity_frequency=1.0 tech_usage_time=1.0 food_between_meals='2' alcohol_consumption='Frequently' transportation_mode='Public_Transportation' obesity_level=None model_config={'from_attributes': True} - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L28  
+[2026-04-05 16:32:38,552] INFO predict_obesity_level() L31   [29.    1.73 84.    3.    4.    1.5   1.    1.    1.    0.    0.    0.
+  0.    0.    0.    0.    0.    0.    0.    0.    0.    1.    0.  ] - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L31  
+[2026-04-05 16:32:38,559] INFO predict_obesity_level() L55   Processando predição para paciente de idade: '29.0' - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L55  
+[2026-04-05 17:00:20,242] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
+[2026-04-05 17:02:13,583] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
+[2026-04-05 17:02:48,695] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
+[2026-04-05 17:03:01,007] ERROR log_exception() L1449 Exception on /obesity-metrics [GET] - call_trace=c:\users\55219\miniconda3\lib\site-packages\flask\app.py L1449
 Traceback (most recent call last):
   File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 2073, in wsgi_app
     response = self.full_dispatch_request()
@@ -11,119 +18,44 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1503, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "c:\users\55219\miniconda3\lib\site-packages\flask_openapi3\scaffold.py", line 191, in wrapper
+  File "c:\users\55219\miniconda3\lib\site-packages\flask_openapi3\scaffold.py", line 109, in wrapper
     resp = _do_wrapper(
   File "c:\users\55219\miniconda3\lib\site-packages\flask_openapi3\do_wrapper.py", line 135, in _do_wrapper
     response = func(**request_kwargs)
-  File "C:\Users\55219\Documents\workspace\pos\burnout\api\app.py", line 44, in predict_obesity_level
-    predictor_service = PredictorService()
-  File "C:\Users\55219\Documents\workspace\pos\burnout\api\model\predictor_service.py", line 6, in __init__
-    self.model = ModelLoader.load()
-  File "C:\Users\55219\Documents\workspace\pos\burnout\api\model\model_loader.py", line 13, in load
-    return joblib.load("./model/obesity_model.pkl")
-  File "c:\users\55219\miniconda3\lib\site-packages\joblib\numpy_pickle.py", line 587, in load
-    obj = _unpickle(fobj, filename, mmap_mode)
-  File "c:\users\55219\miniconda3\lib\site-packages\joblib\numpy_pickle.py", line 506, in _unpickle
-    obj = unpickler.load()
-  File "c:\users\55219\miniconda3\lib\pickle.py", line 1212, in load
-    dispatch[key[0]](self)
-  File "c:\users\55219\miniconda3\lib\site-packages\joblib\numpy_pickle.py", line 344, in load_build
-    self.stack.append(array_wrapper.read(self))
-  File "c:\users\55219\miniconda3\lib\site-packages\joblib\numpy_pickle.py", line 189, in read
-    array = self.read_array(unpickler)
-  File "c:\users\55219\miniconda3\lib\site-packages\joblib\numpy_pickle.py", line 122, in read_array
-    array = pickle.load(unpickler.file_handle)
-ModuleNotFoundError: No module named 'numpy._core.multiarray'
-[2026-04-04 17:55:04,335] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
-[2026-04-04 17:55:06,913] ERROR log_exception() L1449 Exception on /obesity-metrics [POST] - call_trace=c:\users\55219\miniconda3\lib\site-packages\flask\app.py L1449
-Traceback (most recent call last):
-  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 2073, in wsgi_app
-    response = self.full_dispatch_request()
-  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1519, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "c:\users\55219\miniconda3\lib\site-packages\flask_cors\extension.py", line 165, in wrapped_function
-    return cors_after_request(app.make_response(f(*args, **kwargs)))
-  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1517, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1503, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "c:\users\55219\miniconda3\lib\site-packages\flask_openapi3\scaffold.py", line 191, in wrapper
-    resp = _do_wrapper(
-  File "c:\users\55219\miniconda3\lib\site-packages\flask_openapi3\do_wrapper.py", line 135, in _do_wrapper
-    response = func(**request_kwargs)
-  File "C:\Users\55219\Documents\workspace\pos\burnout\api\app.py", line 44, in predict_obesity_level
-    predictor_service = PredictorService()
-  File "C:\Users\55219\Documents\workspace\pos\burnout\api\model\predictor_service.py", line 6, in __init__
-    self.model = ModelLoader.load()
-  File "C:\Users\55219\Documents\workspace\pos\burnout\api\model\model_loader.py", line 11, in load
-    return joblib.load("./model/obesity_model.pkl")
-  File "c:\users\55219\miniconda3\lib\site-packages\joblib\numpy_pickle.py", line 587, in load
-    obj = _unpickle(fobj, filename, mmap_mode)
-  File "c:\users\55219\miniconda3\lib\site-packages\joblib\numpy_pickle.py", line 506, in _unpickle
-    obj = unpickler.load()
-  File "c:\users\55219\miniconda3\lib\pickle.py", line 1212, in load
-    dispatch[key[0]](self)
-KeyError: 219
-[2026-04-04 17:57:15,850] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
-[2026-04-04 17:57:18,659] ERROR log_exception() L1449 Exception on /obesity-metrics [POST] - call_trace=c:\users\55219\miniconda3\lib\site-packages\flask\app.py L1449
-Traceback (most recent call last):
-  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 2073, in wsgi_app
-    response = self.full_dispatch_request()
-  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1519, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "c:\users\55219\miniconda3\lib\site-packages\flask_cors\extension.py", line 165, in wrapped_function
-    return cors_after_request(app.make_response(f(*args, **kwargs)))
-  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1517, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1503, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "c:\users\55219\miniconda3\lib\site-packages\flask_openapi3\scaffold.py", line 191, in wrapper
-    resp = _do_wrapper(
-  File "c:\users\55219\miniconda3\lib\site-packages\flask_openapi3\do_wrapper.py", line 135, in _do_wrapper
-    response = func(**request_kwargs)
-  File "C:\Users\55219\Documents\workspace\pos\burnout\api\app.py", line 44, in predict_obesity_level
-    predictor_service = PredictorService()
-  File "C:\Users\55219\Documents\workspace\pos\burnout\api\model\predictor_service.py", line 6, in __init__
-    self.model = ModelLoader.load()
-  File "C:\Users\55219\Documents\workspace\pos\burnout\api\model\model_loader.py", line 11, in load
-    return joblib.load("./model/obesity_model.pkl")
-  File "c:\users\55219\miniconda3\lib\site-packages\joblib\numpy_pickle.py", line 587, in load
-    obj = _unpickle(fobj, filename, mmap_mode)
-  File "c:\users\55219\miniconda3\lib\site-packages\joblib\numpy_pickle.py", line 506, in _unpickle
-    obj = unpickler.load()
-  File "c:\users\55219\miniconda3\lib\pickle.py", line 1212, in load
-    dispatch[key[0]](self)
-KeyError: 219
-[2026-04-04 18:02:59,718] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
-[2026-04-04 18:03:03,109] ERROR log_exception() L1449 Exception on /obesity-metrics [POST] - call_trace=c:\users\55219\miniconda3\lib\site-packages\flask\app.py L1449
-Traceback (most recent call last):
-  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 2073, in wsgi_app
-    response = self.full_dispatch_request()
-  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1519, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "c:\users\55219\miniconda3\lib\site-packages\flask_cors\extension.py", line 165, in wrapped_function
-    return cors_after_request(app.make_response(f(*args, **kwargs)))
-  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1517, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "c:\users\55219\miniconda3\lib\site-packages\flask\app.py", line 1503, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "c:\users\55219\miniconda3\lib\site-packages\flask_openapi3\scaffold.py", line 191, in wrapper
-    resp = _do_wrapper(
-  File "c:\users\55219\miniconda3\lib\site-packages\flask_openapi3\do_wrapper.py", line 135, in _do_wrapper
-    response = func(**request_kwargs)
-  File "C:\Users\55219\Documents\workspace\pos\burnout\api\app.py", line 44, in predict_obesity_level
-    predictor_service = PredictorService()
-  File "C:\Users\55219\Documents\workspace\pos\burnout\api\model\predictor_service.py", line 6, in __init__
-    self.model = ModelLoader.load()
-  File "C:\Users\55219\Documents\workspace\pos\burnout\api\model\model_loader.py", line 11, in load
-    return joblib.load("./model/obesity_model.pkl")
-  File "c:\users\55219\miniconda3\lib\site-packages\joblib\numpy_pickle.py", line 587, in load
-    obj = _unpickle(fobj, filename, mmap_mode)
-  File "c:\users\55219\miniconda3\lib\site-packages\joblib\numpy_pickle.py", line 506, in _unpickle
-    obj = unpickler.load()
-  File "c:\users\55219\miniconda3\lib\pickle.py", line 1212, in load
-    dispatch[key[0]](self)
-KeyError: 219
-[2026-04-04 18:13:05,133] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
-[2026-04-04 18:18:21,739] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
-[2026-04-04 19:00:12,446] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
+  File "C:\Users\55219\Documents\workspace\pos\burnout\api\app.py", line 83, in get_obesity_metrics
+    log.info(query.name)
+NameError: name 'log' is not defined
+[2026-04-05 17:03:13,642] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
+[2026-04-05 17:03:17,211] INFO get_obesity_metrics() L83   Test - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L83  
+[2026-04-05 17:03:47,862] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
+[2026-04-05 17:04:07,285] INFO _log() L225   * Restarting with stat - call_trace=c:\users\55219\miniconda3\lib\site-packages\werkzeug\_internal.py L225 
+[2026-04-05 17:04:10,205] INFO get_obesity_metrics() L83   None - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L83  
+[2026-04-05 17:04:11,014] INFO get_obesity_metrics() L83   None - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L83  
+[2026-04-05 17:05:05,499] INFO get_obesity_metrics() L83   None - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L83  
+[2026-04-05 17:05:18,988] INFO get_obesity_metrics() L83   None - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L83  
+[2026-04-05 17:05:42,894] INFO get_obesity_metrics() L83   None - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L83  
+[2026-04-05 17:06:57,951] INFO get_obesity_metrics() L83   None - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L83  
+[2026-04-05 17:09:11,346] INFO get_obesity_metrics() L83   None - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L83  
+[2026-04-05 17:23:40,803] INFO get_obesity_metrics() L83   None - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L83  
+[2026-04-05 17:24:00,334] INFO get_obesity_metrics() L83   None - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L83  
+[2026-04-05 17:26:14,904] INFO get_obesity_metrics() L83   None - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L83  
+[2026-04-05 17:28:10,761] INFO get_obesity_metrics() L83   None - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L83  
+[2026-04-05 17:28:36,084] INFO predict_obesity_level() L28   id=None name='LEONARDO ANDRADE DA SILVA' gender='Masculino' age=29.0 height=1.73 weight=84.0 family_history=False high_caloric_intake=False is_smoker=False calorie_monitoring=True vegetable_consumption=3.0 daily_meals_count=3.0 daily_water_intake=2.0 physical_activity_frequency=3.0 tech_usage_time=0.0 food_between_meals='0' alcohol_consumption='no' transportation_mode='Walking' obesity_level=None model_config={'from_attributes': True} - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L28  
+[2026-04-05 17:28:37,004] INFO predict_obesity_level() L31   [29.    1.73 84.    3.    3.    2.    3.    0.    1.    0.    0.    0.
+  0.    0.    0.    1.    0.    0.    0.    0.    0.    0.    1.  ] - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L31  
+[2026-04-05 17:28:37,010] INFO predict_obesity_level() L55   Processando predição para paciente de idade: '29.0' - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L55  
+[2026-04-05 17:29:18,720] INFO get_obesity_metrics() L83   None - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L83  
+[2026-04-05 17:30:40,420] INFO predict_obesity_level() L28   id=None name='LEONARDO ANDRADE DA SILVA' gender='Masculino' age=29.0 height=1.73 weight=84.0 family_history=True high_caloric_intake=False is_smoker=False calorie_monitoring=True vegetable_consumption=2.0 daily_meals_count=4.0 daily_water_intake=1.0 physical_activity_frequency=1.0 tech_usage_time=1.0 food_between_meals='1' alcohol_consumption='Frequently' transportation_mode='Automobile' obesity_level=None model_config={'from_attributes': True} - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L28  
+[2026-04-05 17:30:40,423] INFO predict_obesity_level() L31   [29.    1.73 84.    2.    4.    1.    1.    1.    1.    1.    0.    0.
+  0.    0.    0.    1.    0.    0.    0.    0.    0.    0.    0.  ] - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L31  
+[2026-04-05 17:30:40,429] INFO predict_obesity_level() L55   Processando predição para paciente de idade: '29.0' - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L55  
+[2026-04-05 17:31:30,427] INFO predict_obesity_level() L28   id=None name='LEONARDO ANDRADE DA SILVA' gender='Masculino' age=29.0 height=1.73 weight=84.0 family_history=False high_caloric_intake=False is_smoker=False calorie_monitoring=True vegetable_consumption=3.0 daily_meals_count=4.0 daily_water_intake=3.0 physical_activity_frequency=3.0 tech_usage_time=0.0 food_between_meals='0' alcohol_consumption='no' transportation_mode='Bike' obesity_level=None model_config={'from_attributes': True} - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L28  
+[2026-04-05 17:31:30,430] INFO predict_obesity_level() L31   [29.    1.73 84.    3.    4.    3.    3.    0.    1.    0.    0.    0.
+  0.    0.    0.    1.    0.    0.    0.    1.    0.    0.    0.  ] - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L31  
+[2026-04-05 17:31:30,436] INFO predict_obesity_level() L55   Processando predição para paciente de idade: '29.0' - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L55  
+[2026-04-05 17:31:38,469] INFO get_obesity_metrics() L83   None - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L83  
+[2026-04-05 17:46:58,021] INFO predict_obesity_level() L28   id=None name='Leonarrdo' gender='Masculino' age=29.0 height=1.73 weight=84.0 family_history=True high_caloric_intake=True is_smoker=True calorie_monitoring=True vegetable_consumption=3.0 daily_meals_count=10.0 daily_water_intake=3.0 physical_activity_frequency=3.0 tech_usage_time=3.0 food_between_meals='3' alcohol_consumption='no' transportation_mode='Automobile' obesity_level=None model_config={'from_attributes': True} - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L28  
+[2026-04-05 17:46:58,023] INFO predict_obesity_level() L31   [29.    1.73 84.    3.   10.    3.    3.    3.    1.    1.    1.    0.
+  0.    0.    1.    1.    0.    0.    0.    0.    0.    0.    0.  ] - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L31  
+[2026-04-05 17:46:58,026] INFO predict_obesity_level() L55   Processando predição para paciente de idade: '29.0' - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L55  
+[2026-04-05 17:47:36,092] INFO predict_obesity_level() L55   Processando predição para paciente de idade: '29.0' - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L55  
