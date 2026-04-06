@@ -10,101 +10,140 @@
 
 <body>
 
-  <h1>Predição de Nível de Obesidade</h1>
-
-  <form id="formPredicao">
-
-    <div class="card">
-      <h2> Dados pessoais</h2>
-      <div class="grid">
-        <label>Nome
-          <input type="text" id="name" />
-        </label>
-
-        <label>Gênero
-          <select id="gender">
-            <option>Masculino</option>
-            <option>Feminino</option>
-          </select>
-        </label>
-
-        <label>Idade
-          <input type="number" id="age">
-        </label>
-
-        <label>Altura
-          <input type="number" step="0.01" id="height">
-        </label>
-
-        <label>Peso
-          <input type="number" step="0.1" id="weight">
-        </label>
+  <body>
+    <header>
+      <div class="header-content">
+        <i class="fas fa-heartbeat logo-icon"></i>
+        <div>
+          <h1>HealthCheck AI</h1>
+          <p>Análise Preditiva de Saúde e Obesidade</p>
+        </div>
       </div>
-    </div>
+    </header>
 
-    <div class="card">
-      <h2>Alimentação e histórico</h2>
-      <div class="grid">
-        <label>Algum membro da família já sofreu ou sofre de sobrepeso?
-          <select id="family_history_with_overweight">
-            <option value="false">Não</option>
-            <option value="true">Sim</option>
-          </select>
-        </label>
+    <main class="container">
+      <form id="formPredicao">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-user"></i>
+            <h2>Dados Pessoais</h2>
+          </div>
+          <div class="grid">
+            <div class="input-group">
+              <label for="name">Nome Completo</label>
+              <input type="text" id="name" placeholder="Ex: João Silva" />
+            </div>
+            <div class="input-group">
+              <label for="gender">Gênero</label>
+              <select id="gender">
+                <option>Masculino</option>
+                <option>Feminino</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label for="age">Idade</label>
+              <input type="number" id="age" placeholder="25">
+            </div>
+            <div class="input-group">
+              <label for="height">Altura (m)</label>
+              <input type="number" step="0.01" id="height" placeholder="1.75">
+            </div>
+            <div class="input-group">
+              <label for="weight">Peso (kg)</label>
+              <input type="number" step="0.1" id="weight" placeholder="70.5">
+            </div>
+          </div>
+        </div>
 
-        <label>Come comida calórica frequentemente?
-          <select id="FAVC">
-            <option value="false">Não</option>
-            <option value="true">Sim</option>
-          </select>
-        </label>
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-utensils"></i>
+            <h2>Alimentação e Histórico</h2>
+          </div>
+          <div class="grid">
+            <div class="input-group full-width">
+              <label>Histórico familiar de sobrepeso?</label>
+              <select id="family_history_with_overweight">
+                <option value="false">Não</option>
+                <option value="true">Sim</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label>Comida calórica frequente?</label>
+              <select id="FAVC">
+                <option value="false">Não</option>
+                <option value="true">Sim</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label>Vegetais nas refeições? </label>
 
-        <label>Você geralmente come vegetais nas suas refeições?
-          <select id="FCVC">
-            <option value="1">Nunca</option>
-            <option value="2">Ás vezes</option>
-            <option value="3">Sempre</option>
-          </select>
-        </label>
+              <select id="FCVC">
+                <option value="1">Nunca</option>
+                <option value="2">Ás vezes</option>
+                <option value="3">Sempre</option>
+              </select>
+            </div>
 
-        <label>Quantidade de refeições por dia
-          <input type="number" id="NCP">
-        </label>
+            <div class="input-group">
+              <label>Refeições por dia
+              </label>
+              <input type="number" id="NCP">
 
-        <label>Lanches entre refeições
-          <select id="CAEC">
-            <option value="0">Não</option>
-            <option value="1">Ás vezes</option>
-            <option value="2">Frequentemente</option>
-            <option value="3">Sempre</option>
-          </select>
-        </label>
+            </div>
 
-        <label>Monitora calorias?
-          <select id="SCC">
-            <option value="false">Não</option>
-            <option value="true">Sim</option>
-          </select>
-        </label>
-      </div>
-    </div>
 
-    <div class="card">
-      <h2> Estilo de vida</h2>
-      <div class="grid">
-        <label>Água por dia (em Litros)
-          <input type="number" id="CH2O"> </label>
+            <div class="input-group">
 
+              <label>Lanches entre refeições
+              </label>
+
+              <select id="CAEC">
+                <option value="0">Não</option>
+                <option value="1">Ás vezes</option>
+                <option value="2">Frequentemente</option>
+                <option value="3">Sempre</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label>Monitora calorias?
+              </label>
+              <select id="SCC">
+                <option value="false">Não</option>
+                <option value="true">Sim</option>
+              </select>
+            </div>
+
+          </div>
+ 
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+<i class="fa-solid fa-heart-pulse"></i>            <h2>Estilo de vida</h2>
+          </div>
+          <div class="grid">
+
+            <div class="input-group">
+<label>Água por dia (em Litros)</label>
+          <input type="number" id="CH2O"> 
+            </div>
+            
+
+            <div class="input-group">
         <label>Atividade física
-          <select id="FAF">
+        </label>
+        <select id="FAF">
             <option value="0">Nunca</option>
             <option value="1">Às vezes</option>
             <option value="2">Frequentemente</option>
             <option value="3">Sempre</option>
           </select>
-        </label>
-
-        <label>Quanto tempo você gasta em telas como celulares/tv/notebook e etc.?
+            </div>
+        
+            <div class="input-group">
+<label>Tempo em telas</label>
 
           <select id="TUE">
             <option value="0">Pouco</option>
@@ -112,17 +151,23 @@
             <option value="2">Muito</option>
             <option value="3">Excessivo</option>
           </select>
-        </label>
+            </div>
+        
+            <div class="input-group">
 
-        <label>Quão frequentemente você bebe bebida ácoolica
+        <label>Bebida alcoolica        </label>
+
           <select id="CALC">
             <option value="no">Nunca</option>
             <option value="Sometimes">Às vezes</option>
             <option value="Frequently">Frequentemente</option>
             <option value="Always">Sempre</option>
           </select>
-        </label>
-        <label>Transporte para o trabalho
+            </div>
+
+            <div class="input-group">
+<label>Transporte para o trabalho        </label>
+
           <select id="MTRANS">
             <option value="Walking">Caminhando</option>
             <option value="Bike">Bicicleta</option>
@@ -130,41 +175,53 @@
             <option value="Public_Transportation">Transporte público</option>
             <option value="Automobile">Carro</option>
           </select>
-        </label>
+            </div>
+        
+            <div class="input-group">
+<label>Fuma?        </label>
 
-        <label>Fuma?
           <select id="SMOKE">
             <option value="false">Não</option>
             <option value="true">Sim</option>
           </select>
-        </label>
-      </div>
-    </div>
+            </div>
 
-    <button type="button" onclick="newPrediction(event)">Prever nível de obesidade</button>
-  </form>
-  <div id="resultado">
-    <div class="card">
-  <h2>Histórico Detalhado de Consultas</h2>
-  <div style="overflow-x: auto;"> <table id="tabelaDados">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>IMC Relativo (P/A)</th> <th>Histórico Familiar</th>
-          <th>Atividade Física</th>
-          <th>Consumo Álcool</th>
-          <th>Resultado</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody id="corpoTabela">
-        </tbody>
-    </table>
-  </div>
-</div>
-  </div>
-  <script src="config.js"></script>
-  <script src="scripts.js"></script>
-</body>
+        
+          </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn-predict" onclick="newPrediction(event)">
+            <i class="fas fa-chart-line"></i> Gerar Predição
+          </button>
+        </div>
+      </form>
+
+      <div class="card table-card">
+        <div class="card-header">
+          <i class="fas fa-history"></i>
+          <h2>Histórico de Consultas</h2>
+        </div>
+        <div class="table-wrapper">
+          <table id="tabelaDados">
+            <thead>
+              <tr>
+                <th>Paciente</th>
+                <th>Status</th>
+                <th>IMC</th>
+                <th>Estilo de Vida</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="corpoTabela"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    <script src="config.js"></script>
+    <script src="scripts.js"></script>
+  </body>
 
 </html>
