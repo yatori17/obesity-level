@@ -2,7 +2,7 @@ import pytest
 import json
 from app import app
 from model import Session, ObesityMetrics
-from logger import logger
+
 
 @pytest.fixture
 def client():

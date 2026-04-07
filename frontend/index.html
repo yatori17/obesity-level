@@ -88,7 +88,12 @@
             <div class="input-group">
               <label>Refeições por dia
               </label>
-              <input type="number" id="NCP">
+              <select id="NCP">
+                <option value="1">1 refeição</option>
+                <option value="2">2 refeições</option>
+                <option value="3" selected>3 refeições</option>
+                <option value="4">4 ou mais refeições</option>
+              </select>
 
             </div>
 
@@ -116,77 +121,81 @@
             </div>
 
           </div>
- 
+
         </div>
 
         <div class="card">
           <div class="card-header">
-<i class="fa-solid fa-heart-pulse"></i>            <h2>Estilo de vida</h2>
+            <i class="fa-solid fa-heart-pulse"></i>
+            <h2>Estilo de vida</h2>
           </div>
           <div class="grid">
 
             <div class="input-group">
-<label>Água por dia (em Litros)</label>
-          <input type="number" id="CH2O"> 
+              <label>Água por dia (em Litros)</label>
+              <select id="CH2O">
+                <option value="1">
+                  <1L< /option>
+                <option value="2">1-2L</option>
+                <option value="3">>2L</option>
+              </select>
             </div>
-            
+
 
             <div class="input-group">
-        <label>Atividade física
-        </label>
-        <select id="FAF">
-            <option value="0">Nunca</option>
-            <option value="1">Às vezes</option>
-            <option value="2">Frequentemente</option>
-            <option value="3">Sempre</option>
-          </select>
-            </div>
-        
-            <div class="input-group">
-<label>Tempo em telas</label>
-
-          <select id="TUE">
-            <option value="0">Pouco</option>
-            <option value="1">Moderado</option>
-            <option value="2">Muito</option>
-            <option value="3">Excessivo</option>
-          </select>
-            </div>
-        
-            <div class="input-group">
-
-        <label>Bebida alcoolica        </label>
-
-          <select id="CALC">
-            <option value="no">Nunca</option>
-            <option value="Sometimes">Às vezes</option>
-            <option value="Frequently">Frequentemente</option>
-            <option value="Always">Sempre</option>
-          </select>
+              <label>Atividade física
+              </label>
+              <select id="FAF">
+                <option value="0">Nunca</option>
+                <option value="1">Às vezes</option>
+                <option value="2">Frequentemente</option>
+                <option value="3">Sempre</option>
+              </select>
             </div>
 
             <div class="input-group">
-<label>Transporte para o trabalho        </label>
+              <label>Tempo em telas</label>
 
-          <select id="MTRANS">
-            <option value="Walking">Caminhando</option>
-            <option value="Bike">Bicicleta</option>
-            <option value="Motorbike">Motocicleta</option>
-            <option value="Public_Transportation">Transporte público</option>
-            <option value="Automobile">Carro</option>
-          </select>
+              <select id="TUE">
+                <option value="0">0-2 horas</option>
+                <option value="1">3-5 horas</option>
+                <option value="2">> 5 horas</option>
+              </select>
             </div>
-        
+
             <div class="input-group">
-<label>Fuma?        </label>
 
-          <select id="SMOKE">
-            <option value="false">Não</option>
-            <option value="true">Sim</option>
-          </select>
+              <label>Bebida alcoolica </label>
+
+              <select id="CALC">
+                <option value="no">Nunca</option>
+                <option value="Sometimes">Às vezes</option>
+                <option value="Frequently">Frequentemente</option>
+                <option value="Always">Sempre</option>
+              </select>
             </div>
 
-        
+            <div class="input-group">
+              <label>Transporte para o trabalho </label>
+
+              <select id="MTRANS">
+                <option value="Walking">Caminhando</option>
+                <option value="Bike">Bicicleta</option>
+                <option value="Motorbike">Motocicleta</option>
+                <option value="Public_Transportation">Transporte público</option>
+                <option value="Automobile">Carro</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label>Fuma? </label>
+
+              <select id="SMOKE">
+                <option value="false">Não</option>
+                <option value="true">Sim</option>
+              </select>
+            </div>
+
           </div>
         </div>
         </div>
