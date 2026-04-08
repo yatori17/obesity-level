@@ -26,11 +26,9 @@ class ObesityMetrics(Base):
     alcohol_consumption = Column(String(20)) # CALC: No, Sometimes, Frequently, Always
     transportation_mode = Column(String(30)) # MTRANS: Public_Tr, Walking, Automobile, etc.
 
-    # --- Physical Activity & Tech ---
     physical_activity_frequency = Column(Float) # FAF: 0 to 3 (days)
     tech_usage_time = Column(Float)             # TUE: 0 to 2 (hours)
 
-    # --- Target Variable ---
     obesity_level = Column(String(50), nullable=False) # NObeyesdad: Normal, Obesity I, II, etc.
 
     from datetime import datetime

@@ -30,27 +30,35 @@
           </div>
           <div class="grid">
             <div class="input-group">
-              <label for="name">Nome Completo</label>
-              <input type="text" id="name" placeholder="Ex: João Silva" />
+              <label for="name"><i class="fas fa-id-card"></i> Nome Completo</label>
+              <input type="text" id="name" placeholder="Ex: João Silva" required />
+              <span class="error-message" id="error-name">Este campo é obrigatório.</span>
             </div>
             <div class="input-group">
-              <label for="gender">Gênero</label>
-              <select id="gender">
+              <label for="gender"><i class="fa-solid fa-person-half-dress"></i> Gênero</label>
+              <select id="gender" required>
+                <option value="" disabled selected>Selecione...</option>
                 <option>Masculino</option>
                 <option>Feminino</option>
               </select>
+              <span class="error-message" id="error-gender">Este campo é obrigatório.</span>
             </div>
             <div class="input-group">
-              <label for="age">Idade</label>
-              <input type="number" id="age" placeholder="25">
+              <label for="age"><i class="fas fa-calendar-alt"></i> Idade</label>
+              <input type="number" id="age" placeholder="25" required step="1"
+                oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+              <span class="error-message" id="error-age">Este campo é obrigatório.</span>
+
             </div>
             <div class="input-group">
-              <label for="height">Altura (m)</label>
-              <input type="number" step="0.01" id="height" placeholder="1.75">
+              <label for="height"><i class="fas fa-ruler-vertical"></i> Altura (m)</label>
+              <input type="number" step="0.01" id="height" placeholder="1.75" required>
+              <span class="error-message" id="error-height">Insira uma altura válida.</span>
             </div>
             <div class="input-group">
-              <label for="weight">Peso (kg)</label>
-              <input type="number" step="0.1" id="weight" placeholder="70.5">
+              <label for="weight"><i class="fas fa-weight-scale"></i> Peso(kg)</label>
+              <input type="number" step="0.1" id="weight" placeholder="70.5" required>
+              <span class="error-message" id="error-weight">Insira um peso válido.</span>
             </div>
           </div>
         </div>
@@ -62,62 +70,78 @@
           </div>
           <div class="grid">
             <div class="input-group full-width">
-              <label>Histórico familiar de sobrepeso?</label>
-              <select id="family_history_with_overweight">
+              <label><i class="fas fa-users"></i> Histórico familiar de sobrepeso?</label>
+              <select id="family_history_with_overweight" required>
+                <option value="" disabled selected>Selecione...</option>
                 <option value="false">Não</option>
                 <option value="true">Sim</option>
               </select>
-            </div>
-            <div class="input-group">
-              <label>Comida calórica frequente?</label>
-              <select id="FAVC">
-                <option value="false">Não</option>
-                <option value="true">Sim</option>
-              </select>
-            </div>
-            <div class="input-group">
-              <label>Vegetais nas refeições? </label>
+              <span class="error-message" id="error-family_history_with_overweight">Este campo é obrigatório.</span>
 
-              <select id="FCVC">
+            </div>
+            <div class="input-group">
+              <label><i class="fas fa-hamburger"></i> Comida calórica frequente?</label>
+              <select id="FAVC" required>
+                <option value="" disabled selected>Selecione...</option>
+                <option value="false">Não</option>
+                <option value="true">Sim</option>
+              </select>
+              <span class="error-message" id="error-FAVC">Este campo é obrigatório.</span>
+
+            </div>
+            <div class="input-group">
+              <label><i class="fas fa-leaf"></i> Vegetais nas refeições? </label>
+
+              <select id="FCVC" required>
+                <option value="" disabled selected>Selecione...</option>
                 <option value="1">Nunca</option>
                 <option value="2">Ás vezes</option>
                 <option value="3">Sempre</option>
               </select>
+              <span class="error-message" id="error-FCVC">Este campo é obrigatório.</span>
+
             </div>
 
             <div class="input-group">
-              <label>Refeições por dia
+              <label><i class="fas fa-utensils"></i> Refeições diárias
               </label>
-              <select id="NCP">
+              <select id="NCP" required>
+                <option value="" disabled selected>Selecione...</option>
                 <option value="1">1 refeição</option>
                 <option value="2">2 refeições</option>
                 <option value="3" selected>3 refeições</option>
                 <option value="4">4 ou mais refeições</option>
               </select>
+              <span class="error-message" id="error-NCP">Este campo é obrigatório.</span>
 
             </div>
 
 
             <div class="input-group">
 
-              <label>Lanches entre refeições
+              <label><i class="fas fa-cookie-bite"></i> Lanches entre refeições
               </label>
 
-              <select id="CAEC">
+              <select id="CAEC" required>
+                <option value="" disabled selected>Selecione...</option>
                 <option value="0">Não</option>
                 <option value="1">Ás vezes</option>
                 <option value="2">Frequentemente</option>
                 <option value="3">Sempre</option>
               </select>
+              <span class="error-message" id="error-CAEC">Este campo é obrigatório.</span>
             </div>
 
             <div class="input-group">
-              <label>Monitora calorias?
+              <label><i class="fas fa-weight-hanging"></i> Monitora calorias?
               </label>
-              <select id="SCC">
+              <select id="SCC" required>
+                <option value="" disabled selected>Selecione...</option>
                 <option value="false">Não</option>
                 <option value="true">Sim</option>
               </select>
+              <span class="error-message" id="error-SCC">Este campo é obrigatório.</span>
+
             </div>
 
           </div>
@@ -132,68 +156,84 @@
           <div class="grid">
 
             <div class="input-group">
-              <label>Água por dia (em Litros)</label>
-              <select id="CH2O">
+              <label><i class="fa-solid fa-droplet"></i> Água por dia (em Litros)</label>
+              <select id="CH2O" required>
+                <option value="" disabled selected>Selecione...</option>
                 <option value="1">
-                  <1L< /option>
+                  <1L </option>
                 <option value="2">1-2L</option>
                 <option value="3">>2L</option>
               </select>
+              <span class="error-message" id="error-CH2O">Este campo é obrigatório.</span>
+
             </div>
 
 
             <div class="input-group">
-              <label>Atividade física
+              <label><i class="fas fa-dumbbell"></i> Atividade física
               </label>
-              <select id="FAF">
+              <select id="FAF" required>
+                <option value="" disabled selected>Selecione...</option>
                 <option value="0">Nunca</option>
                 <option value="1">Às vezes</option>
                 <option value="2">Frequentemente</option>
                 <option value="3">Sempre</option>
               </select>
+              <span class="error-message" id="error-FAF">Este campo é obrigatório.</span>
+
             </div>
 
             <div class="input-group">
-              <label>Tempo em telas</label>
+              <label><i class="fas fa-desktop"></i> Tempo em telas</label>
 
-              <select id="TUE">
+              <select id="TUE" required>
+                <option value="" disabled selected>Selecione...</option>
                 <option value="0">0-2 horas</option>
                 <option value="1">3-5 horas</option>
                 <option value="2">> 5 horas</option>
               </select>
+              <span class="error-message" id="error-TUE">Este campo é obrigatório.</span>
+
             </div>
 
             <div class="input-group">
 
-              <label>Bebida alcoolica </label>
+              <label><i class="fas fa-glass-cheers"></i> Bebida alcoolica </label>
 
-              <select id="CALC">
+              <select id="CALC" required>
+                <option value="" disabled selected>Selecione...</option>
                 <option value="no">Nunca</option>
                 <option value="Sometimes">Às vezes</option>
                 <option value="Frequently">Frequentemente</option>
                 <option value="Always">Sempre</option>
               </select>
+              <span class="error-message" id="error-CALC">Este campo é obrigatório.</span>
             </div>
 
             <div class="input-group">
-              <label>Transporte para o trabalho </label>
+              <label><i class="fas fa-bus"></i> Transporte para o trabalho </label>
 
-              <select id="MTRANS">
+              <select id="MTRANS" required>
+                <option value="" disabled selected>Selecione...</option>
                 <option value="Walking">Caminhando</option>
                 <option value="Bike">Bicicleta</option>
                 <option value="Motorbike">Motocicleta</option>
                 <option value="Public_Transportation">Transporte público</option>
                 <option value="Automobile">Carro</option>
               </select>
+              <span class="error-message" id="error-MTRANS">Este campo é obrigatório.</span>
+
             </div>
 
             <div class="input-group">
-              <label>Fuma? </label>
+              <label><i class="fas fa-smoking"></i> Fuma? </label>
 
-              <select id="SMOKE">
+              <select id="SMOKE" required>
+                <option value="" disabled selected>Selecione...</option>
                 <option value="false">Não</option>
                 <option value="true">Sim</option>
               </select>
+              <span class="error-message" id="error-SMOKE">Este campo é obrigatório.</span>
             </div>
 
           </div>
@@ -202,7 +242,7 @@
         </div>
 
         <div class="actions">
-          <button type="button" class="btn-predict" onclick="newPrediction(event)">
+          <button type="button" id= "btn-predict" class="btn-predict" onclick="newPrediction(event)" disabled>
             <i class="fas fa-chart-line"></i> Gerar Predição
           </button>
         </div>
@@ -218,14 +258,29 @@
             <thead>
               <tr>
                 <th>Paciente</th>
-                <th>Status</th>
                 <th>IMC</th>
-                <th>Estilo de Vida</th>
+                <th>Histórico familiar</th>
+                <th>Atividade física</th>
+                <th>Consumo de alcool</th>
+                <th>Status de Saúde</th>
                 <th>Ações</th>
               </tr>
             </thead>
             <tbody id="corpoTabela"></tbody>
           </table>
+        </div>
+      </div>
+      <div id="modalDetalhes" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2><i class="fas fa-file-medical"></i> Detalhes da Avaliação</h2>
+            <span class="close-button" onclick="closeModal()">&times;</span>
+          </div>
+          <div id="detalhesCorpo" class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-secondary" onclick="closeModal()">Fechar</button>
+          </div>
         </div>
       </div>
     </main>

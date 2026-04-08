@@ -36,6 +36,12 @@ async function predictObesityMetrics(obesityMetrics) {
     }
 }
 
+async function getObesityMetricsById(id) {
+    const res = await fetch(`${baseUrl}/obesity-metrics/${id}`);
+    const data = await res.json();
+    openObesityMetricsDetail(data);
+}
+
 
 const newPrediction = async (event) => {
     event.preventDefault();
@@ -60,17 +66,17 @@ const newPrediction = async (event) => {
     };
 
     try {
-        // Agora passamos apenas o objeto 'patientData'
         const result = await predictObesityMetrics(patientData);
 
-        // Limpeza dos campos após o sucesso (usando seus IDs de input)
         const fieldsToClear = [
-            "gender", "age", "height", "weight", "family_history_with_overweight",
+            "name", "gender", "age", "height", "weight", "family_history_with_overweight",
             "FAVC", "FCVC", "NCP", "SCC", "CH2O", "FAF", "TUE", "CALC", "MTRANS", "SMOKE"
         ];
         fieldsToClear.forEach(id => document.getElementById(id).value = "");
 
-        alert(`Resultado: ${result.obesity_level}`);
+        alert(`Resultado: ${translations[result.obesity_level]}`);
+
+        await getList()
 
     } catch (error) {
         console.error("Erro ao processar predição:", error);
@@ -129,7 +135,7 @@ const insertList = (item) => {
     const fafMap = ["Nunca", "Raramente", "Frequentemente", "Sempre"];
     line.insertCell(3).innerHTML = fafMap[Math.round(item.physical_activity_frequency)] || "N/A";
 
-    line.insertCell(4).innerHTML = fafMap[Math.round(item.physical_activity_frequency)] || "N/A";
+    line.insertCell(4).innerHTML = translations[item.alcohol_consumption] || item.alcohol_consumption;
 
     const cellLevel = line.insertCell(5);
     const obesity_level = translations[item.obesity_level] || item.obesity_level;
@@ -142,5 +148,169 @@ const insertList = (item) => {
     btnDelete.appendChild(icon);
     btnDelete.className = "btn-delete";
     btnDelete.onclick = () => deleteItem(item.id);
-    line.insertCell(6).appendChild(btnDelete);
+    let iconView = document.createElement('i');
+    iconView.className = "fa-solid fa-eye";
+
+    let btnView = document.createElement('button');
+    btnView.className = "btn-view";
+    btnView.appendChild(iconView);
+
+    btnView.onclick = () => getObesityMetricsById(item.id);
+
+    let actionCell = line.insertCell(6);
+    actionCell.appendChild(btnView);
+    actionCell.appendChild(btnDelete);
 }
+
+
+const openObesityMetricsDetail = (item) => {
+
+    const corpoModal = document.getElementById('detalhesCorpo');
+
+    const fafTraduzido = item.physical_activity_frequency >= 2 ? "Frequente (Atleta)" :
+        (item.physical_activity_frequency >= 1 ? "Moderada" : "Sedentário");
+    const aguaMap = {
+        "1": "Menos de 1 Litro",
+        "2": "1 a 2 Litros",
+        "3": "Mais de 2 Litros"
+    };
+
+    const fcvcMap = {
+        "1": "Nunca consome vegetais",
+        "2": "Consome às vezes",
+        "3": "Consome sempre (em todas as refeições)"
+    };
+    const waterConsuptionTranslated = aguaMap[item.daily_water_intake] || item.daily_water_intake
+
+    const vegetable_consumption = fcvcMap[item.vegetable_consumption] || item.vegetable_consumption
+
+    corpoModal.innerHTML = `
+        <div class="detail-item">
+            <strong><i class="fas fa-id-card"></i> Paciente</strong>
+            <span>${item.name} (${item.gender})</span>
+        </div>
+        <div class="detail-item">
+            <strong><i class="fas fa-calendar-alt"></i> Idade</strong>
+            <span>${item.age} anos</span>
+        </div>
+        <div class="detail-item">
+            <strong><i class="fas fa-ruler-vertical"></i> Altura / Peso</strong>
+            <span>${item.height}m / ${item.weight}kg</span>
+        </div>
+        <div class="detail-item">
+            <strong><i class="fas fa-users"></i> Histórico Familiar</strong>
+            <span>${translate(item.family_history)}</span>
+        </div>
+        <div class="detail-item">
+            <strong><i class="fas fa-dumbbell"></i> Atividade Física</strong>
+            <span>${fafTraduzido}</span>
+        </div>
+        <div class="detail-item">
+            <strong><i class="fa-solid fa-droplet"></i> Consumo de Água</strong>
+            <span>${waterConsuptionTranslated}</span>
+        </div>
+        <div class="detail-item">
+            <strong><i class="fas fa-utensils"></i> Refeições Diárias</strong>
+            <span>${translate(item.daily_meals_count)}</span>
+        </div>
+        <div class="detail-item">
+            <strong><i class="fas fa-hamburger"></i> Comida calórica frequente</strong>
+            <span>${translate(item.high_caloric_intake)}</span>
+        </div>
+
+        <div class="detail-item">
+            <strong><i class="fas fa-weight-hanging"></i> Monitora Calorias</strong>
+            <span>${translate(item.calorie_monitoring)}</span>
+        </div>
+
+        <div class="detail-item">
+            <strong><i class="fas fa-leaf"></i> Vegetais nas refeiões</strong>
+            <span>${vegetable_consumption}</span>
+        </div>
+        <div class="detail-item">
+            <strong><i class="fas fa-cookie-bite"></i> Lanches entre refeições</strong>
+            <span>${translate(item.food_between_meals)}</span>
+        </div>
+
+        <div class="detail-item">
+            <strong><i class="fas fa-desktop"></i> Tempo em tela</strong>
+            <span>${translate(item.tech_usage_time)}</span>
+        </div>
+        
+        <div class="detail-item">
+            <strong><i class="fas fa-glass-cheers"></i> Bebida alcoolica</strong>
+            <span>${translate(item.alcohol_consumption)}</span>
+        </div>
+
+        <div class="detail-item">
+            <strong><i class="fas fa-smoking"></i> Fuma</strong>
+            <span>${translate(item.is_smoker)}</span>
+        </div>
+        <div class="detail-item">
+            <strong><i class="fas fa-bus"></i> Meio de Transporte</strong>
+            <span>${translate(item.transportation_mode)}</span>
+        </div>
+        <div class="detail-item" style="grid-column: span 2; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #ddd;">
+            <strong><i class="fas fa-stethoscope"></i> Resultado da Predição de Obesidade</strong>
+            <span class="badge" style="font-size: 1.1rem; display: block; margin-top: 5px;">
+                ${translate(item.obesity_level)}
+            </span>
+        </div>
+    `;
+
+    document.getElementById('modalDetalhes').style.display = 'block';
+}
+
+const closeModal = () => {
+    document.getElementById('modalDetalhes').style.display = 'none';
+}
+
+window.onclick = function (event) {
+    const modal = document.getElementById('modalDetalhes');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+
+function translate(value) {
+    if (value == null) {
+        return 'N/A';
+    }
+    return translations[value] ? translations[value] : value;
+}
+
+const formInputs = document.querySelectorAll('input[required], select[required]');
+const btnPredict = document.getElementById('btn-predict');
+
+const validateForm = () => {
+    let allValid = true;
+
+    formInputs.forEach(input => {
+        const errorSpan = document.getElementById(`error-${input.id}`);
+        
+        if (!input.value || input.value === "") {
+            allValid = false;
+            if (input.dataset.touched) {
+                if (errorSpan) errorSpan.style.display = 'block';
+                input.style.borderColor = '#ef4444';
+            }
+        } else {
+            if (errorSpan) errorSpan.style.display = 'none';
+            input.style.borderColor = '#e2e8f0';
+        }
+    });
+
+    btnPredict.disabled = !allValid;
+};
+
+formInputs.forEach(input => {
+    input.addEventListener('input', () => {
+        input.dataset.touched = "true";
+        validateForm();
+    });
+    
+    input.addEventListener('blur', () => {
+        input.dataset.touched = "true";
+        validateForm();
+    });
+});

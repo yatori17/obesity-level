@@ -63,7 +63,6 @@ def predict_obesity_level(form: ObesityMetricsSchema):
         
         logger.debug(f"Adicionado registro de obesidade ID: '{paciente.id}'")
         
-        # Retorna usando a função de visualização que criamos anteriormente
         return present_obesity_metrics(paciente), 200
 
     except Exception as e:
@@ -88,6 +87,28 @@ def get_obesity_metrics(query: ObesityMetricsSearchSchema):
 
     logger.debug(f"{len(obesityMetrics)} obesityMetrics found")
     return present_obesity_metrics_list(obesityMetrics), 200
+
+@app.get(
+    "/obesity-metrics/<int:id>",
+    tags=[obesity_metrics_tag],
+    responses={
+        "200": ObesityMetricsSchema,
+        "404": ErrorSchema,
+    },
+)
+def get_obesity_metrics_by_id(path: ObesityMetricsPath):
+    logger.debug(f"Retrieving obesityMetrics with id={path.id}")
+    session = Session()
+
+    obesity_metrics = session.query(ObesityMetrics).filter(ObesityMetrics.id == path.id).first()
+
+    if not obesity_metrics:
+        logger.warning(f"ObesityMetrics report with id={id} not found")
+        return {"error": "ObesityMetrics report not found!"}, 404
+
+    logger.debug(f"ObesityMetrics found: {obesity_metrics.name}")
+    return present_obesity_metrics(obesity_metrics), 200
+
 
 
 @app.delete(

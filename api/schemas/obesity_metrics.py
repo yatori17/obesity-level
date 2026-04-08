@@ -33,6 +33,9 @@ class ObesityMetricsSchema(BaseModel):
 class ObesityMetricsSearchSchema(BaseModel):
     name: Optional[str]
 
+class ObesityMetricsPath(BaseModel):
+    id: int
+    
 class ObesityMetricsDeleteSchema(BaseModel):
     id: int
 
