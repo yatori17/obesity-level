@@ -15,7 +15,7 @@ def client():
 def sample_metrics_data():
     """Dados de exemplo baseados no caso do Leonardo Andrade"""
     return {
-        "name": "Leonardo Teste API",
+        "name": "Leonardo Teste API1",
         "gender": "Masculino",
         "age": 29,
         "height": 1.73,
@@ -92,8 +92,36 @@ def test_delete_obesity_metrics(client, sample_metrics_data):
     response = client.delete(f'/obesity-metrics?id={id_to_delete}')
     assert response.status_code == 200
     assert "removed successfully" in response.json['message']
+
+def test_add_duplicate_name(client, sample_metrics_data):
+    """Cobre o erro 409 (Duplicidade)"""
+    client.post('/obesity-metrics', data=sample_metrics_data)
     
-def test_cleanup_database():
+    response = client.post('/obesity-metrics', data=sample_metrics_data)
+    assert response.status_code == 409
+    assert "Métricas já existente" in response.json['message']
+
+def test_get_metrics_by_id_not_found(client):
+    """Cobre o erro 404 na busca por ID"""
+    response = client.get('/obesity-metrics/999999')
+    assert response.status_code == 404
+    assert "not found" in response.json['error'].lower()
+
+def test_get_metrics_search_empty(client):
+    """Cobre o cenário de busca por nome que não existe"""
+    response = client.get('/obesity-metrics?name=NomeInexistenteXYZ')
+    assert response.status_code == 200
+    # De acordo com seu app.py, se não acha nada, retorna lista vazia
+    assert response.json['obesityMetrics'] == []
+
+def test_delete_metrics_not_found(client):
+    """Cobre o erro 404 na deleção"""
+    response = client.delete('/obesity-metrics?id=999999')
+    assert response.status_code == 404
+    assert "not found" in response.json['message'].lower()
+
+@pytest.fixture(autouse=True)
+def cleanup():
     """Limpa os registros criados durante os testes"""
     session = Session()
     session.query(ObesityMetrics).filter(

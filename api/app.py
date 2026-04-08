@@ -57,7 +57,13 @@ def predict_obesity_level(form: ObesityMetricsSchema):
     try:
         session = Session()
 
-        # Adicionando o registro ao banco
+        if session.query(ObesityMetrics).filter(ObesityMetrics.name == form.name).first():
+            error_msg = "Métricas já existente para esse nome"
+            logger.warning(
+                f"Erro ao adicionar paciente '{paciente.name}', {error_msg}"
+            )
+            return {"message": error_msg}, 409   
+             
         session.add(paciente)
         session.commit()
         

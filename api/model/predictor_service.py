@@ -21,7 +21,6 @@ class PredictorService:
             'MTRANS_Motorbike', 'MTRANS_Public_Transportation', 'MTRANS_Walking'
         ]}
 
-        # 1. Preenchendo valores numéricos diretos (com conversão segura)
         input_dict['Age'] = float(form.age or 0)
         input_dict['Height'] = float(form.height or 0)
         input_dict['Weight'] = float(form.weight or 0)

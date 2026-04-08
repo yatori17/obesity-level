@@ -80,12 +80,16 @@ const newPrediction = async (event) => {
 
     } catch (error) {
         console.error("Erro ao processar predição:", error);
+        alert("Erro ao processar predição: " + error);
     }
 }
 
 
-const getList = async () => {
+const getList = async (name = '') => {
     let url = 'http://127.0.0.1:5000/obesity-metrics';
+    if (name) {
+        url += "?name=" + name;
+    }
     fetch(url, {
         method: 'get',
     })
@@ -313,4 +317,15 @@ formInputs.forEach(input => {
         input.dataset.touched = "true";
         validateForm();
     });
+});
+
+function handleSearch() {
+    const searchTerm = document.getElementById('searchInput').value;
+    getList(searchTerm);
+}
+
+document.getElementById('searchInput')?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        handleSearch();
+    }
 });
