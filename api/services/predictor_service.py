@@ -1,5 +1,5 @@
 import pandas as pd
-from model.model_loader import ModelLoader
+from services.model_loader import ModelLoader
 import numpy as np
 
 class PredictorService:

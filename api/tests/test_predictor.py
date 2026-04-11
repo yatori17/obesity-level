@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 import numpy as np
-from model.predictor_service import PredictorService
+from services.predictor_service import PredictorService
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 

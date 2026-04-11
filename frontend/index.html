@@ -66,11 +66,11 @@
         <div class="card">
           <div class="card-header">
             <i class="fas fa-utensils"></i>
-            <h2>Alimentação e Histórico</h2>
+            <h2>Alimentação e Histórico de sobrepeso</h2>
           </div>
           <div class="grid">
             <div class="input-group full-width">
-              <label><i class="fas fa-users"></i> Histórico familiar de sobrepeso?</label>
+              <label><i class="fas fa-users"></i> Histórico na família?</label>
               <select id="family_history_with_overweight" required>
                 <option value="" disabled selected>Selecione...</option>
                 <option value="false">Não</option>
@@ -242,7 +242,7 @@
         </div>
 
         <div class="actions">
-          <button type="button" id= "btn-predict" class="btn-predict" onclick="newPrediction(event)" disabled>
+          <button type="button" id="btn-predict" class="btn-predict" onclick="newPrediction(event)" disabled>
             <i class="fas fa-chart-line"></i> Gerar Predição
           </button>
         </div>
@@ -254,10 +254,10 @@
           <h2>Histórico de Consultas</h2>
         </div>
         <div class="search-container">
-    <i class="fas fa-magnifying-glass"></i>
-    <input type="text" id="searchInput" placeholder="Buscar paciente...">
-    <button onclick="handleSearch()" class="btn-search">Buscar</button>
-</div>
+          <i class="fas fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Buscar paciente...">
+          <button onclick="handleSearch()" class="btn-search">Buscar</button>
+        </div>
         <div class="table-wrapper">
           <table id="tabelaDados">
             <thead>

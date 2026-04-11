@@ -5,7 +5,7 @@ from urllib.parse import unquote
 from sqlalchemy.exc import IntegrityError
 
 from model import Session, ObesityMetrics
-from model.predictor_service import PredictorService
+from services.predictor_service import PredictorService
 from logger import logger
 from schemas import *
 from flask_cors import CORS
@@ -15,7 +15,7 @@ app = OpenAPI(__name__, info=info)
 CORS(app)
 
 # definindo tags
-home_tag = Tag(name="Documentation", description="Seleção de documentação: Swagger, Redoc ou RapiDoc")
+home_tag = Tag(name="Documentation", description="Documentation selection: Swagger, Redoc or RapiDoc")
 obesity_metrics_tag = Tag(name="ObesityMetrics", description="CRD (Create/Read/Delete) for obesity metrics and prediction of obesity")
 
 @app.get('/', tags=[home_tag])
@@ -31,7 +31,7 @@ def predict_obesity_level(form: ObesityMetricsSchema):
     logger.info(x_input)
     obesity_level = str(predictor_service.predict(x_input))
 
-    paciente = ObesityMetrics(
+    obesity_report = ObesityMetrics(
         name = form.name,
         gender= form.gender,
         age= form.age,
@@ -52,29 +52,29 @@ def predict_obesity_level(form: ObesityMetricsSchema):
         obesity_level= obesity_level
     )
 
-    logger.info(f"Processando predição para paciente de idade: '{paciente.age}'")
+    logger.info(f"Processing prediction for person with age: '{obesity_report.age}'")
 
     try:
         session = Session()
 
         if session.query(ObesityMetrics).filter(ObesityMetrics.name == form.name).first():
-            error_msg = "Métricas já existente para esse nome"
+            error_msg = "Métricas já existente para paciente com esse nome"
             logger.warning(
-                f"Erro ao adicionar paciente '{paciente.name}', {error_msg}"
+                f"Error adding obesity_metrics for the patient with name '{obesity_report.name}', {error_msg}"
             )
             return {"message": error_msg}, 409   
              
-        session.add(paciente)
+        session.add(obesity_report)
         session.commit()
         
-        logger.debug(f"Adicionado registro de obesidade ID: '{paciente.id}'")
+        logger.debug(f"Adding obesity metrics for patient with ID: '{obesity_report.id}'")
         
-        return present_obesity_metrics(paciente), 200
+        return present_obesity_metrics(obesity_report), 200
 
     except Exception as e:
-        error_msg = f"Não foi possível salvar os dados de métricas: {str(e)}"
-        logger.warning(f"Erro ao processar métricas, {error_msg}")
-        return {"message": "Erro interno ao salvar os dados."}, 400
+        error_msg = f"It was not possible to persist the data for this metrics: {str(e)}"
+        logger.warning(f"Error processing metrics, {error_msg}")
+        return {"message": "Erro interno persistindo dados."}, 400
 
 
 @app.get('/obesity-metrics', tags=[obesity_metrics_tag],
@@ -102,6 +102,7 @@ def get_obesity_metrics(query: ObesityMetricsSearchSchema):
         "404": ErrorSchema,
     },
 )
+
 def get_obesity_metrics_by_id(path: ObesityMetricsPath):
     logger.debug(f"Retrieving obesityMetrics with id={path.id}")
     session = Session()
@@ -110,12 +111,10 @@ def get_obesity_metrics_by_id(path: ObesityMetricsPath):
 
     if not obesity_metrics:
         logger.warning(f"ObesityMetrics report with id={id} not found")
-        return {"error": "ObesityMetrics report not found!"}, 404
+        return {"error": "Métricas de obesidade não foram encontradas para esse paciente"}, 404
 
     logger.debug(f"ObesityMetrics found: {obesity_metrics.name}")
     return present_obesity_metrics(obesity_metrics), 200
-
-
 
 @app.delete(
     "/obesity-metrics",
@@ -140,7 +139,7 @@ def delete_paciente(query: ObesityMetricsDeleteSchema):
     )
 
     if not obesity_metrics:
-        error_msg = "ObesityMetrics Report not found :/"
+        error_msg = "Reporte de métricas de obesidade não foi encontrado para esse paciente"
         logger.warning(
             f"Error deleting the report with id '{obesity_metrics_id}', {error_msg}"
         )
@@ -150,5 +149,5 @@ def delete_paciente(query: ObesityMetricsDeleteSchema):
         session.commit()
         logger.debug(f"Deleting obesity metrics report with id#{obesity_metrics_id}")
         return {
-            "message": f"Obesity Metrics with id {obesity_metrics_id} was removed successfully!"
+            "message": f"Métricas de obesidade para paciente de nome {obesity_metrics.name} foi removida com sucesso!"
         }, 200
