@@ -1,5 +1,0 @@
-[2026-04-09 20:55:11,436] INFO predict_obesity_level() L55   Processando predição para paciente de idade: '29.0' - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L55  
-[2026-04-09 20:55:11,445] WARNING predict_obesity_level() L62   Erro ao adicionar paciente 'Leonardo Teste API1', Métricas já existente para esse nome - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L62  
-[2026-04-09 20:55:11,454] WARNING get_obesity_metrics_by_id() L112  ObesityMetrics report with id=<built-in function id> not found - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L112 
-[2026-04-09 20:55:11,460] INFO get_obesity_metrics() L88   NomeInexistenteXYZ - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L88  
-[2026-04-09 20:55:11,468] WARNING delete_paciente() L144  Error deleting the report with id '999999', ObesityMetrics Report not found :/ - call_trace=C:\Users\55219\Documents\workspace\pos\burnout\api\app.py L144 
