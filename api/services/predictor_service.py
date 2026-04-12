@@ -31,10 +31,10 @@ class PredictorService:
 
         # Preenchendo colunas binárias (One-Hot Encoding Manual)
         if str(form.gender).lower() in ['masculino', 'male']: input_dict['Gender_Male'] = 1.0
-        if str(form.family_history).lower() in ['true', 'yes', 'sim']: input_dict['family_history_with_overweight_yes'] = 1.0
-        if str(form.high_caloric_intake).lower() in ['true', 'yes', 'sim']: input_dict['FAVC_yes'] = 1.0
-        if str(form.is_smoker).lower() in ['true', 'yes', 'sim']: input_dict['SMOKE_yes'] = 1.0
-        if str(form.calorie_monitoring).lower() in ['true', 'yes', 'sim']: input_dict['SCC_yes'] = 1.0
+        if str(form.family_history).lower() in ['true']: input_dict['family_history_with_overweight_yes'] = 1.0
+        if str(form.high_caloric_intake).lower() in ['true']: input_dict['FAVC_yes'] = 1.0
+        if str(form.is_smoker).lower() in ['true']: input_dict['SMOKE_yes'] = 1.0
+        if str(form.calorie_monitoring).lower() in ['true']: input_dict['SCC_yes'] = 1.0
 
         mtrans = str(form.transportation_mode).lower()
         if 'bike' in mtrans: input_dict['MTRANS_Bike'] = 1.0

@@ -86,7 +86,7 @@ const newPrediction = async (event) => {
 
 
 const getList = async (name = '') => {
-    let url = 'http://127.0.0.1:5000/obesity-metrics';
+    let url = baseUrl + '/obesity-metrics';
     if (name) {
         url += "?name=" + name;
     }
@@ -108,7 +108,7 @@ const getList = async (name = '') => {
 
 const deleteItem = (id) => {
     if (confirm("Você tem certeza que deseja excluir este registro?")) {
-        let url = `http://127.0.0.1:5000/obesity-metrics?id=${id}`;
+        let url = baseUrl + `/obesity-metrics?id=${id}`;
         fetch(url, {
             method: 'delete'
         })
@@ -184,9 +184,18 @@ const openObesityMetricsDetail = (item) => {
         "2": "Consome às vezes",
         "3": "Consome sempre (em todas as refeições)"
     };
+
+    const timeOnScreenMap = {
+        "0": "0-2 horas",
+        "1": "3 - 5 horas",
+        "3": "Mais de 5 horas"
+    };
+
     const waterConsuptionTranslated = aguaMap[item.daily_water_intake] || item.daily_water_intake
 
-    const vegetable_consumption = fcvcMap[item.vegetable_consumption] || item.vegetable_consumption
+    const vegetableConsumption = fcvcMap[item.vegetable_consumption] || item.vegetable_consumption
+
+    const timeOnScreen = timeOnScreenMap[item.tech_usage_time] || item.tech_usage_time
 
     corpoModal.innerHTML = `
         <div class="detail-item">
@@ -215,7 +224,7 @@ const openObesityMetricsDetail = (item) => {
         </div>
         <div class="detail-item">
             <strong><i class="fas fa-utensils"></i> Refeições Diárias</strong>
-            <span>${translate(item.daily_meals_count)}</span>
+            <span>${item.daily_meals_count}</span>
         </div>
         <div class="detail-item">
             <strong><i class="fas fa-hamburger"></i> Comida calórica frequente</strong>
@@ -229,7 +238,7 @@ const openObesityMetricsDetail = (item) => {
 
         <div class="detail-item">
             <strong><i class="fas fa-leaf"></i> Vegetais nas refeiões</strong>
-            <span>${vegetable_consumption}</span>
+            <span>${vegetableConsumption}</span>
         </div>
         <div class="detail-item">
             <strong><i class="fas fa-cookie-bite"></i> Lanches entre refeições</strong>
@@ -238,7 +247,7 @@ const openObesityMetricsDetail = (item) => {
 
         <div class="detail-item">
             <strong><i class="fas fa-desktop"></i> Tempo em tela</strong>
-            <span>${translate(item.tech_usage_time)}</span>
+            <span>${timeOnScreen}</span>
         </div>
         
         <div class="detail-item">

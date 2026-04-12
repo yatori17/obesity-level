@@ -3,6 +3,7 @@ from flask import redirect
 from urllib.parse import unquote
 
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy import func
 
 from model import Session, ObesityMetrics
 from services.predictor_service import PredictorService
@@ -10,7 +11,7 @@ from logger import logger
 from schemas import *
 from flask_cors import CORS
 
-info = Info(title="Obesity Report", version="1.0.0")
+info = Info(title="Obesity Level Predictor API", version="1.0.0")
 app = OpenAPI(__name__, info=info)
 CORS(app)
 
@@ -20,11 +21,14 @@ obesity_metrics_tag = Tag(name="ObesityMetrics", description="CRD (Create/Read/D
 
 @app.get('/', tags=[home_tag])
 def home():
-    return redirect("/frontend/index.html")
+    return redirect('/openapi')
 
 @app.post("/obesity-metrics", tags=[obesity_metrics_tag],
           responses={"200": ObesityMetricsSchema, "400": ErrorSchema})
 def predict_obesity_level(form: ObesityMetricsSchema):
+    """ Add a new Obesity metrics in the databas and predics the obesity level for the patient
+    Return a view of the patient with the prediction
+    """
     logger.info(form)
     predictor_service = PredictorService()
     x_input = predictor_service.prepare_form(form)
@@ -57,7 +61,7 @@ def predict_obesity_level(form: ObesityMetricsSchema):
     try:
         session = Session()
 
-        if session.query(ObesityMetrics).filter(ObesityMetrics.name == form.name).first():
+        if session.query(ObesityMetrics).filter(func.lower(ObesityMetrics.name) == func.lower(form.name)).first():
             error_msg = "Métricas já existente para paciente com esse nome"
             logger.warning(
                 f"Error adding obesity_metrics for the patient with name '{obesity_report.name}', {error_msg}"
@@ -80,6 +84,12 @@ def predict_obesity_level(form: ObesityMetricsSchema):
 @app.get('/obesity-metrics', tags=[obesity_metrics_tag],
          responses={"200": ObesityMetricsSearchSchema, "404": ErrorSchema})
 def get_obesity_metrics(query: ObesityMetricsSearchSchema):
+    """ Get all obesity metrics from the database based on name or not
+    Args:
+        [Optional] name: Name of the patient
+    Returns:
+        msg: Success message or error
+    """
     logger.debug("Retrieving ObesityMetricsSearchSchema")
     session = Session()
     searchQuery = session.query(ObesityMetrics)
@@ -104,6 +114,14 @@ def get_obesity_metrics(query: ObesityMetricsSearchSchema):
 )
 
 def get_obesity_metrics_by_id(path: ObesityMetricsPath):
+    """Get an obesity metrics from the database by the identifier
+
+    Args:
+        id (integer) the id of the report
+
+    Returns:
+        msg: Success message or error
+    """
     logger.debug(f"Retrieving obesityMetrics with id={path.id}")
     session = Session()
 

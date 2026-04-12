@@ -29,7 +29,7 @@ cd api
 python -m venv venv
 source venv/bin/activate  # (No Windows: venv\Scripts\activate)
 pip install -r requirements.txt
-python app.py
+flask run --host 0.0.0.0 --port 5000 --reload
 ```
 > A API estará disponível em: `http://localhost:5000`
 

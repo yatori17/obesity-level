@@ -16,6 +16,7 @@ database/
 *.sqlite
 *.sqlite3
 data_storage/
+api/database/db.sqlite3
 
 *.log
 log/
