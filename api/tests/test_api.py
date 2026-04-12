@@ -35,10 +35,10 @@ def sample_metrics_data():
     }
 
 def test_home_redirect(client):
-    """Testa se a rota "/" redireciona para o frontend"""
+    """Testa se a rota "/" redireciona para o openapi"""
     response = client.get('/')
     assert response.status_code == 302
-    assert '/frontend/index.html' in response.location
+    assert '/openapi' in response.location
 
 def test_add_obesity_prediction(client, sample_metrics_data):
     """Testa a criação de um registro e a predição do modelo"""
